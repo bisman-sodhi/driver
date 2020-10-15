@@ -15,7 +15,7 @@ int getdir (string dir, vector<string> &files)
   DIR *dp;
   struct dirent *dirp;
   //Added sort below
-  sort(files.begin(),files.end());
+  //sort(files.begin(),files.end());
   if((dp  = opendir(dir.c_str())) == NULL) {
     cout << "Error(" << errno << ") opening " << dir << endl;
     return errno;
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
       cout << "Error opening " << dir << "; Exiting ..." << endl;
       return(-2);
     }
-
+  sort(files.begin(),files.end());
   
   // This part of the program opens every data file one by one and prints out the
   // words contained in it.
