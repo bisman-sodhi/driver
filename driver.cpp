@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
+#include <algorithm>
 using namespace std;
 
 // Given a directory, return all the files in that directory
@@ -14,6 +14,8 @@ int getdir (string dir, vector<string> &files)
 {
   DIR *dp;
   struct dirent *dirp;
+  //Added sort below
+  sort(files.begin(),files.end());
   if((dp  = opendir(dir.c_str())) == NULL) {
     cout << "Error(" << errno << ") opening " << dir << endl;
     return errno;
@@ -28,8 +30,10 @@ int getdir (string dir, vector<string> &files)
 
 int main(int argc, char* argv[])
 {
+  	
   string dir; //
   vector<string> files = vector<string>();
+  
 
 
 
@@ -43,16 +47,19 @@ int main(int argc, char* argv[])
       return(-1);
     }
   dir = string(argv[1]);
+  
   if (getdir(dir,files)!=0)
     {
       cout << "Error opening " << dir << "; Exiting ..." << endl;
       return(-2);
     }
+
   
   // This part of the program opens every data file one by one and prints out the
   // words contained in it.
 //adding random comment
   string slash("/");
+  //sort(files.begin(),files.end());
   for (unsigned int i = 0; i < files.size(); i++) {
     if(files[i][0]=='.') continue; //skip hidden files
     cout << "OPEN " << files[i] << endl;
